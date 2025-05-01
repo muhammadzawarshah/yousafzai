@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <!-- Using Web Components -->
+        <my-header></my-header>  <!-- Header Component -->
+        <my-nav></my-nav>  <!-- Navbar Component -->
+
+        
+        <!-- main section -->
+<main class="main-element">
+   
+    <div class="my-4">
+        
+        <!-- Form Element container -->
+        <div class="card-for-form">
+            <h2 class="main-heading-forCard text-center">Get in Touch with Us!</h2>
+            <p class="text-justify sm:text-center sm:p-3 font-bold">Have questions, feedback, or inquiries? We’d love to hear from you! Fill out the form below, and our team will get back to you as soon as possible. Whether you need assistance, want to collaborate, or just have a suggestion, we’re here to help. Reach out today!</p>
+            <form id="contactForm">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 sm:w-[600px] lg:w-[800px] m-auto">
+                    <div>
+                        <label for="name" class="uppercase">Name</label><br>
+                        <input type="text" name="name" id="name" placeholder="Type Your Full Name" class="form-input">
+                    </div>
+                    <div>
+                        <label for="email" class="uppercase">Email</label><br>
+                        <input type="text" name="email" id="email" placeholder="Type Your Email" class="form-input">
+                    </div>
+                    <div>
+                        <label for="phone" class="uppercase">Phone</label><br>
+                        <input type="text" name="phone" id="phone" placeholder="Type Your Phone Number" class="form-input">
+                    </div>
+                    <div>
+                        <label for="organization" class="uppercase">Organization</label><br>
+                        <input type="text" name="organization" id="organization" placeholder="Type Your Organization Name" class="form-input">
+                    </div>
+                    
+                    <div class="sm:col-span-2">
+                        <label for="feedback" class="uppercase">Your Feedback</label><br>
+                        <textarea name="feedback" id="feedback" placeholder="Your feedback?" class="form-input" rows="4"></textarea>
+                    </div>
+                    <div class="sm:col-span-2 text-center">
+                        <input type="submit" id="msg" value="Send Message" class="btn w-72">
+                    </div>
+                </div>
+            </form>
+            <p id="message" class="text-center font-bold text-[20px]"></p>
+        </div>
+
+    </div>
+    
+ </main>
+
+        <!-- Using Web Component -->
+        <my-footer></my-footer>  <!-- Footer Component -->
+    </div>
+
+   
+   
+    <!-- Include Components Script -->
+    <script src="/components.js" defer></script>
+
+    <!-- Form Submission using the Fetch API -->
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevents page reload
+            const formData = new FormData(this);
+            const formObject = Object.fromEntries(formData.entries());
+
+            const response = await fetch("/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formObject)
+            });
+
+            const result = await response.json();
+            const messageEl = document.getElementById("message");
+
+            if (response.ok) {
+                messageEl.textContent = "Thanks for reaching out! Our team will respond to you shortly.";
+                messageEl.style.color = "green";
+                this.reset(); // Clears the form
+            } else {
+                messageEl.textContent = "Error: " + result.error;
+                messageEl.style.color = "red";
+            }
+        });
+    </script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

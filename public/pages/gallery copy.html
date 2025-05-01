@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- GLightbox CSS (For Photo & Video Popups) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <style>
+        /* Remove display: none, allowing class toggling to work properly */
+    </style>
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <my-header></my-header>  <!-- Header Component -->
+        <my-nav></my-nav>  <!-- Navbar Component -->
+
+        <main class="main-element">
+            <div class="my-4 max-w-6xl mx-auto">
+                
+                <!-- Thumbnails Section -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
+                    <!-- Photos Thumbnail -->
+                    <div id="photo-thumb" class="card cursor-pointer text-center hover:shadow-xl transition">
+                        <img src="/images/photos_thumb.webp" alt="Photos" class="w-full h-40 object-cover rounded-md">
+                        <h3 class="text-lg font-semibold mt-2">View Photos</h3>
+                    </div>
+
+                    <!-- Videos Thumbnail -->
+                    <div id="video-thumb" class="card cursor-pointer text-center hover:shadow-xl transition">
+                        <img src="/images/video_thumb.jpeg" alt="Videos" class="w-full h-40 object-cover rounded-md">
+                        <h3 class="text-lg font-semibold mt-2">View Videos</h3>
+                    </div>
+                </div>
+
+                <!-- Hidden Swiper Gallery (Popup) -->
+                <div id="photo-gallery" class="hidden">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <a href="/images/7.jpg" class="glightbox swiper-slide"><img src="/images/7.jpg" class="w-full h-64 object-cover rounded-lg"></a>
+                            <a href="/images/48.jpg" class="glightbox swiper-slide"><img src="/images/48.jpg" class="w-full h-64 object-cover rounded-lg"></a>
+                            <a href="/images/5.jpg" class="glightbox swiper-slide"><img src="/images/5.jpg" class="w-full h-64 object-cover rounded-lg"></a>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+                
+                <!-- Video Gallery (GLightbox Popup) -->
+                <section id="video-gallery" class="mt-8 hidden">
+                    <h2 class="text-center text-2xl font-bold mb-4">Video Gallery</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <a href="https://www.youtube.com/watch?v=sampleID1" class="glightbox">
+                            <img src="/images/video_thumb1.jpg" class="w-full h-40 object-cover rounded-md" alt="Video 1">
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=sampleID2" class="glightbox">
+                            <img src="/images/video_thumb2.jpg" class="w-full h-40 object-cover rounded-md" alt="Video 2">
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=sampleID3" class="glightbox">
+                            <img src="/images/video_thumb3.jpg" class="w-full h-40 object-cover rounded-md" alt="Video 3">
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <my-footer></my-footer>  <!-- Footer Component -->
+    </div>
+
+    <!-- Include Components Script -->
+    <script src="/components.js" defer></script>
+
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- GLightbox.js (For Video & Photo Popup) -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <script>
+        // Initialize GLightbox for Photos (Popup Swiper)
+        const lightboxPhoto = GLightbox({
+            selector: 'a.glightbox', // Ensure it targets anchors correctly
+            loop: true
+        });
+
+        // Initialize GLightbox for Videos
+        const lightboxVideo = GLightbox({
+            selector: 'a.glightbox',
+            type: 'video',
+        });
+
+        // Show/Hide Galleries on Thumbnail Click
+        document.getElementById("photo-thumb").addEventListener("click", function () {
+            const photoGallery = document.getElementById("photo-gallery");
+            photoGallery.classList.toggle("hidden");
+            document.getElementById("video-gallery").classList.add("hidden");
+
+            // Ensure Swiper is initialized when showing the gallery
+            if (!photoGallery.classList.contains("hidden")) {
+                new Swiper('.swiper-container', {
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    loop: true,
+                });
+            }
+        });
+
+        document.getElementById("video-thumb").addEventListener("click", function () {
+            document.getElementById("video-gallery").classList.toggle("hidden");
+            document.getElementById("photo-gallery").classList.add("hidden");
+        });
+    </script>
+
+    <!-- Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

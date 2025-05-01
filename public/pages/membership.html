@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="text-gray-600">
+    <div>
+        <my-header></my-header>
+        <my-nav></my-nav>
+
+        <main class="main-element">
+            <div class="my-4">
+                <div class="card-for-form">
+                    <h2 class="main-heading-forCard text-center">Membership Form</h2>
+                    <form id="memberForm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 sm:w-[600px] lg:w-[800px] m-auto">
+                            <div>
+                                <label for="mem_name" class="uppercase font-bold">Full Name</label><br>
+                                <input type="text" name="mem_name" id="mem_name" placeholder="Type Your Full Name" class="form-input">
+                            </div>
+                            <div>
+                                <label for="mem_fname" class="uppercase font-bold">Father's Name</label><br>
+                                <input type="text" name="mem_fname" id="mem_fname" placeholder="Type Your Father Name" class="form-input">
+                            </div>
+                            <div>
+                                <label for="top_cat" class="uppercase font-bold" id="label_top_cat">Select <span class="text-red-800">Main</span> Cast</label><br>
+                                <select name="top_cat" id="top_cat" class="form-input">
+                                    <option value="">Select Your Main Cast</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="sub_cat_1" class="uppercase font-bold" id="label_sub_cat_1">Select <span class="text-red-800">Sub</span> Cast</label><br>
+                                <select name="sub_cat_1" id="sub_cat_1" class="form-input">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="sub_cat_2" class="uppercase font-bold" id="label_sub_cat_2">Select <span class="text-red-800">Sub</span> Cast</label><br>
+                                <select name="sub_cat_2" id="sub_cat_2" class="form-input">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="sub_cat_3" class="uppercase font-bold" id="label_sub_cat_3">Select <span class="text-red-800">Sub</span> Cast</label><br>
+                                <select name="sub_cat_3" id="sub_cat_3" class="form-input">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="sub_cat_4" class="uppercase font-bold" id="label_sub_cat_4">Select <span class="text-red-800">Sub</span> Cast</label><br>
+                                <select name="sub_cat_4" id="sub_cat_4" class="form-input">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="mem_email" class="uppercase font-bold">Email</label><br>
+                                <input type="email" name="mem_email" id="mem_email" placeholder="Type Your Email" class="form-input">
+                            </div>
+                            <div>
+                                <label for="mem_phone_number" class="uppercase font-bold">Phone Number</label><br>
+                                <input type="number" name="mem_phone_number" id="mem_phone_number" placeholder="Type Your Phone Number" class="form-input">
+                            </div>
+                            <div>
+                                <label for="mem_district" class="uppercase font-bold">District</label><br>
+                                <input type="text" name="mem_district" id="mem_district" placeholder="Type Your District" class="form-input">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="mem_address" class="uppercase font-bold">Permanent Address</label><br>
+                                <textarea name="mem_address" id="mem_address" placeholder="Type Your Permanent Address Here" class="form-input"></textarea>
+                            </div>
+                            <div class="sm:col-span-2 text-center">
+                                <input type="submit" id="register" value="Register Now" class="btn w-72">
+                            </div>
+                        </div>
+                    </form>
+                    <p id="message" class="text-center font-bold text-[20px]"></p>
+                </div>
+            </div>
+        </main>
+
+        <my-footer></my-footer>
+    </div>
+
+    <script src="/components.js" defer></script>
+    <script src="/js/hierarchy-selector.js"></script>
+    <script>
+        document.getElementById("memberForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const formObject = Object.fromEntries(formData.entries());
+
+            const response = await fetch("/members", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formObject)
+            });
+
+            const result = await response.json();
+            const messageEl = document.getElementById("message");
+
+            if (response.ok) {
+                messageEl.textContent = "Member added successfully!";
+                messageEl.style.color = "green";
+                this.reset();
+            } else {
+                messageEl.textContent = "Error: " + result.error;
+                messageEl.style.color = "red";
+            }
+        });
+
+        // Dynamic label updates for hierarchical cast
+        const castDropdowns = ["top_cat", "sub_cat_1", "sub_cat_2", "sub_cat_3", "sub_cat_4"];
+        castDropdowns.forEach((id, index) => {
+            const selectEl = document.getElementById(id);
+            if (!selectEl) return;
+            selectEl.addEventListener("change", () => {
+                for (let i = index + 1; i < castDropdowns.length; i++) {
+                    const nextSelect = document.getElementById(castDropdowns[i]);
+                    const nextLabel = document.getElementById("label_" + castDropdowns[i]);
+                    if (nextSelect && nextLabel && nextSelect.options.length > 1) {
+                        const selectedText = selectEl.options[selectEl.selectedIndex].text;
+                        nextLabel.innerHTML = `Select <span class="text-red-800">${selectedText}</span> Sub Cast`;
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

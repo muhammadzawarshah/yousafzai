@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card{
+    @apply bg-white rounded overflow-hidden shadow-md relative p-3;
+}
+.card-for-form{
+    @apply bg-white rounded shadow-md relative p-3;
+}
+.form-input{
+    @apply rounded-md p-2 w-full border-2 border-red-800 text-gray-700 outline-none placeholder-gray-600 sm:placeholder:text-lg;
+}
+.main-heading-forCard{
+    @apply text-red-800 font-bold py-1 border-b-2 border-gray-100 text-xl;
+}
+.main-heading-withoutCard{
+    @apply text-red-800 font-bold border-b border-gray-300 text-xl mx-2;
+}
+.para-withoutCard{
+    @apply p-2 text-justify;
+}
+.main-element{
+    @apply bg-gray-100 w-full md:w-[760px] lg:w-[960px] m-auto py-4 px-2;
+    box-sizing: border-box;
+}
+.admin-main-element{
+    @apply bg-gray-100 w-full m-auto py-4 px-2;
+    box-sizing: border-box;
+}
+.badge{    
+    @apply bg-secondary-100 text-secondary-200 text-xs font-bold uppercase rounded-full p-2 absolute top-0 mt-2 ml-2;
+}
+.btn{
+    @apply rounded-md py-2 px-3 font-bold text-lg bg-red-700 text-white;
+}
+
+.btn-gallery{
+    @apply rounded-lg py-2 px-10 font-bold text-lg bg-gray-400 text-gray-950 shadow-lg;
+}
+.btn-gallery-active{
+    @apply bg-red-700 text-white;
+}
+.btn-admin-actions{
+    @apply rounded-md py-1 px-1  bg-red-700 text-white;
+}
+/* Applying styles using Tailwind's @apply directive */
+.news-slider .news-item a {
+    @apply text-gray-800 no-underline transition-all duration-300 ease-in-out;
+}
+
+.news-slider .news-item a:hover {
+    @apply underline;
+}
+.table-default {
+    @apply border-collapse w-full;
+}
+
+.th-td-default {
+    @apply p-2 border border-black;
+}

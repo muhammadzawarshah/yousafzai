@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yousafzai Organization</title>
+
+  <!-- Favicon and icons -->
+  <link rel="icon" href="/images/favicon2.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="manifest" href="/images/site.webmanifest" />
+
+  <!-- Swiper Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Slick Carousel Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <style>
+    .swiper {
+      width: 100%;
+      height: 400px;
+      margin: auto;
+    }
+
+    .swiper-slide img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="text-gray-600">
+  <div>
+    <my-header></my-header>
+    <my-nav></my-nav>
+
+    <!-- Swiper Slider -->
+    <section>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="/images/7.jpg" alt="Slide 1" /></div>
+          <div class="swiper-slide"><img src="/images/48.jpg" alt="Slide 2" /></div>
+          <div class="swiper-slide"><img src="/images/43.jpg" alt="Slide 3" /></div>
+          <div class="swiper-slide"><img src="/images/38.jpg" alt="Slide 4" /></div>
+          <div class="swiper-slide"><img src="/images/79.jpg" alt="Slide 5" /></div>
+          <div class="swiper-slide"><img src="/images/76.jpg" alt="Slide 6" /></div>
+          <div class="swiper-slide"><img src="/images/70.jpg" alt="Slide 7" /></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-element">
+      <div class="grid sm:grid-cols-3 gap-4">
+        <!-- Chairman's Message -->
+        <div class="card sm:col-span-2">
+          <h3 class="main-heading-forCard">Chairman's Message</h3>
+          <div>
+            <div class="float-right ml-2 mt-2">
+              <img src="/images/M-JehanAlam.jpeg" alt="Chairman" class="sm:h-44 object-cover rounded" />
+              <div class="text-center font-bold underline">Malik Jehan Alam</div>
+            </div>
+            <p class="text-justify">
+              <span class="font-bold">Dear Yousafzai Brothers and Sisters,</span><br />
+              It is an honor to address our esteemed tribe, whose legacy of resilience, leadership, and unity has
+              shaped history. From the time of Malak Ahmad Khan Yousafzai to today, our people have remained
+              steadfast in their values, contributing to the cultural and social fabric of the region. <br />
+              The Yousafzai Organization is committed to the welfare and prosperity of our community. Through
+              education, social development, and economic empowerment, we strive to uplift our people while preserving
+              our proud heritage. <br />
+              Together, with unity and determination, we can build a brighter future for all Yousafzais. Let us honor
+              our ancestors by working towards progress and solidarity.
+            </p>
+          </div>
+        </div>
+
+        <!-- News & Events -->
+        <div class="card">
+          <h3 class="main-heading-forCard">News & Events</h3>
+          <div id="news-slider" class="news-slider"></div>
+        </div>
+      </div>
+
+      <!-- Introduction -->
+      <div class="my-4">
+        <h3 class="main-heading-withoutCard">Introduction</h3>
+        <p class="para-withoutCard">
+          The Yousafzai tribe, one of the most prominent lineages of the Pashtun people, has played an instrumental
+          role in shaping the history and culture of the region. Under the esteemed leadership of Malak Ahmad Khan
+          Yousafzai, the tribe migrated during the late 15th and early 16th centuries to what is now Khyber
+          Pakhtunkhwa, where they established powerful strongholds in Dir, Swat, Malakand, Mardan, and Swabi. <br />
+          Although the majority of the tribe settled in these areas, numerous Yousafzai communities continue to
+          flourish in Afghanistan, Iran, and India. Renowned for their esteemed traditions, leadership, and invaluable
+          contributions to Pashtun heritage, the Yousafzais remain a respected and historically significant tribe.
+        </p>
+      </div>
+
+      <!-- Anthem Video -->
+      <div class="">
+        <video controls class="w-full sm:w-[70%] m-auto h-[310px] object-cover rounded-lg shadow-lg">
+          <source src="/videos/Anthem.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </main>
+
+    <my-footer></my-footer>
+  </div>
+
+  <!-- Swiper Script -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper(".swiper", {
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
+  <!-- Include Web Components -->
+  <script src="/components.js" defer></script>
+
+  <!-- jQuery and Slick Carousel -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+  <!-- Load News Dynamically -->
+  <script src="/js/news.js"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

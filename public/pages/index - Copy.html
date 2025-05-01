@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousafzai Organization</title>
+
+    <!-- Swiper Stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        .swiper {
+            width: 100%;
+            height: 400px;
+            margin: auto;
+        }
+
+        .swiper-slide img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- slick carousal styles cdn links -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <!-- -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <!-- Using Web Components -->
+        <my-header></my-header>  <!-- Header Component -->
+        <my-nav></my-nav>  <!-- Navbar Component -->
+
+        <!-- Swiper Slider -->
+        <section>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="../images/slider-1.jpg" alt="Slide 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/slider-2.jpg" alt="Slide 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/slider-3.jpg" alt="Slide 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/slider-4.jpg" alt="Slide 4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/slider-5.jpg" alt="Slide 5">
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- Scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </section>
+
+        <!-- main section -->
+<main class="bg-gray-100 w-full md:w-[760px] lg:w-[960px] m-auto border-box py-4 px-2">
+    <!-- content wrapper for grid having chariman message and news-events section -->
+    <div class="grid sm:grid-cols-2  gap-4 ">
+        <div class="card">
+            <h3 class="main-heading-forCard">Chairman's Message</h3>
+            <div class="grid grid-cols-3 gap-2">
+                <p class="text-justify col-span-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nisi tenetur laborum reiciendis minus provident autem harum aspernatur praesentium quaerat consequuntur, iste excepturi unde, obcaecati hic rem ea nemo totam, saepe earum voluptas odio ab quas ut. Nihil harum mollitia natus error, illum cupiditate similique ab ut rem pariatur ea!</p>
+                <div>
+                    <img src="/public/images/M-JehanAlam.jpeg" alt="" class="w-full sm:h-52 object-cover rounded mt-2">
+                </div>
+            </div>
+            
+        </div>
+        <div class="card">
+            <h3 class="main-heading-forCard">News & Events</h3>
+            
+            <div class="news-slider">
+                <p class="news-item"><a href="#">Grand welcome by the people of Dir to the President of Yousafzai Organization</a></p>
+                <p class="news-item"><a href="#">Opening of our official website - Yousafzai Organization</a></p>
+                <p class="news-item"><a href="#">Next-Grande Jirgah of Yousafzai Tribe</a></p>
+                <p class="news-item"><a href="#">You are invited for a free membership</a></p>
+                <p class="news-item"><a href="#">See our website for more latest updates</a></p>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-4">
+        <h3 class="main-heading-withoutCard">Introduction</h3>
+        <p class="para-withoutCard">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nisi tenetur laborum reiciendis minus provident autem harum aspernatur praesentium quaerat consequuntur, iste excepturi unde, obcaecati hic rem ea nemo totam, saepe earum voluptas odio ab quas ut. Nihil harum mollitia natus error, illum cupiditate similique ab ut rem pariatur ea! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nisi tenetur laborum reiciendis minus provident autem harum aspernatur praesentium quaerat consequuntur, iste excepturi unde, obcaecati hic rem ea nemo totam, saepe earum voluptas odio ab quas ut. Nihil harum mollitia natus error, illum cupiditate similique ab ut rem pariatur ea! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nisi tenetur laborum reiciendis minus provident autem harum aspernatur praesentium quaerat consequuntur, iste excepturi unde, obcaecati hic rem ea nemo totam, saepe earum voluptas odio ab quas ut. Nihil harum mollitia natus error, illum cupiditate similique ab ut rem pariatur ea!</p>
+    </div>
+    <!-- video for homepage -->
+    <div class="">
+        <video controls class="w-full">
+            <source src="/public/videos/Test.mov" type="video/quicktime">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+ </main>
+
+        <!-- Using Web Component -->
+        <my-footer></my-footer>  <!-- Footer Component -->
+    </div>
+
+    <!-- Swiper Script -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+    <!-- Include Components Script -->
+    <script src="../components/components.js" defer></script>
+    <!-- Add jQuery (required for Slick) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $('.news-slider').slick({
+        autoplay: true,       // Enable auto sliding
+        autoplaySpeed: 2000,  // Delay in milliseconds (2 seconds)
+        infinite: true,       // Infinite loop
+        dots: true,           // Show navigation dots
+        arrows: false,        // Hide arrows for sliding
+        speed: 500,           // Transition speed
+        slidesToShow: 3,      // Show 3 item at a time
+        vertical: true,       // Vertical slider
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <!-- Using Web Components -->
+        <my-header></my-header> <!-- Header Component -->
+        <my-nav></my-nav> <!-- Navbar Component -->
+
+        <!-- main section -->
+        <main class="admin-main-element">
+            <div class="my-4">
+                <div class="card-for-form">
+                    <h2 class="main-heading-forCard text-center">Add News</h2>
+
+                    <form id="newsForm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 sm:w-[600px] lg:w-[800px] m-auto">
+                            <div class="sm:col-span-2">
+                                <label for="title" class="uppercase">News Title</label><br>
+                                <input type="text" name="title" id="title" placeholder="Enter news title" class="form-input" required>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="date" class="uppercase">Date</label><br>
+                                <input type="date" name="date" id="date" class="form-input" required>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="description" class="uppercase">News Description</label><br>
+                                <textarea name="description" id="description" placeholder="Write news details..." class="form-input" rows="4" required></textarea>
+                            </div>
+                            <div class="sm:col-span-2 text-center">
+                                <input type="submit" value="Add News" class="btn w-72">
+                            </div>
+                        </div>
+                    </form>
+                    <p id="formMessage" class="text-center font-bold text-[20px] mt-2"></p>
+                </div>
+
+                <!-- Display Submitted News -->
+                <div class="card-for-form mt-8">
+                    <h2 class="main-heading-forCard text-center">Submitted News</h2>
+                    <div id="newsList" class="p-4 space-y-4"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Using Web Component -->
+        <my-footer></my-footer> <!-- Footer Component -->
+    </div>
+
+    <!-- Include Components Script -->
+    <script src="/admin/adminComponents.js" defer></script>
+
+    <script>
+        document.getElementById("newsForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const newsData = {
+                title: document.getElementById("title").value,
+                date: document.getElementById("date").value,
+                description: document.getElementById("description").value,
+            };
+
+            const response = await fetch("/api/news", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newsData),
+            });
+
+            const result = await response.json();
+            const msgEl = document.getElementById("formMessage");
+
+            if (response.ok) {
+                msgEl.textContent = "News added successfully!";
+                msgEl.style.color = "green";
+                this.reset();
+                fetchNews();
+            } else {
+                msgEl.textContent = "Error: " + result.error;
+                msgEl.style.color = "red";
+            }
+        });
+
+        async function fetchNews() {
+            const res = await fetch("/api/news");
+            const newsList = await res.json();
+            const container = document.getElementById("newsList");
+            container.innerHTML = "";
+
+            newsList.forEach((item) => {
+                const div = document.createElement("div");
+                div.className = "border p-4 rounded shadow bg-white";
+                div.innerHTML = `
+                    <h3 class="text-lg font-bold">${item.title}</h3>
+                    <p class="text-sm text-gray-500">${new Date(item.date).toLocaleDateString()}</p>
+                    <p>${item.description}</p>
+                    <div class="mt-2">
+                        <button class="btn btn-edit" onclick="editNews('${item._id}')">Edit</button>
+                        <button class="btn btn-delete" onclick="deleteNews('${item._id}')">Delete</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        async function editNews(id) {
+            const newsItem = await fetch(`/api/news/${id}`).then(res => res.json());
+            document.getElementById("title").value = newsItem.title;
+            document.getElementById("date").value = newsItem.date;
+            document.getElementById("description").value = newsItem.description;
+
+            // Update form to handle PUT request
+            document.getElementById("newsForm").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const newsData = {
+                    title: document.getElementById("title").value,
+                    date: document.getElementById("date").value,
+                    description: document.getElementById("description").value,
+                };
+
+                const response = await fetch(`/api/news/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newsData),
+                });
+
+                const result = await response.json();
+                const msgEl = document.getElementById("formMessage");
+
+                if (response.ok) {
+                    msgEl.textContent = "News updated successfully!";
+                    msgEl.style.color = "green";
+                    this.reset();
+                    fetchNews();
+                } else {
+                    msgEl.textContent = "Error: " + result.error;
+                    msgEl.style.color = "red";
+                }
+            });
+        }
+
+        async function deleteNews(id) {
+            const confirmation = confirm("Are you sure you want to delete this news?");
+            if (confirmation) {
+                const response = await fetch(`/api/news/${id}`, {
+                    method: "DELETE",
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert("News deleted successfully!");
+                    fetchNews();
+                } else {
+                    alert("Error: " + result.error);
+                }
+            }
+        }
+
+        fetchNews();
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

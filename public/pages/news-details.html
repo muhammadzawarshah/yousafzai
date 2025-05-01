@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+    <link rel="stylesheet" href="/css/styles.css">
+     <!-- Favicon and icons -->
+  <link rel="icon" href="/images/favicon2.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="manifest" href="/images/site.webmanifest" />
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <!-- Using Web Components -->
+        <my-header></my-header>  <!-- Header Component -->
+        <my-nav></my-nav>  <!-- Navbar Component -->
+
+        <!-- Main Section -->
+        <main class="main-element">
+            <div class="my-4">
+                <!-- News Details will be dynamically loaded here -->
+                <div id="news-details" class="card-for-form"></div>
+            </div>
+        </main>
+
+        <!-- Using Web Component -->
+        <my-footer></my-footer>  <!-- Footer Component -->
+    </div>
+
+    <!-- Include Components Script -->
+    <script src="/components.js" defer></script>
+
+    <!-- News Details Fetch and Display -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+
+            if (!newsId) {
+                document.getElementById('news-details').innerHTML = "<p>News ID is missing!</p>";
+                return;
+            }
+
+            fetch(`/api/news/${newsId}`)
+                .then(res => res.json())
+                .then(newsItem => {
+                    if (!newsItem) {
+                        document.getElementById('news-details').innerHTML = "<p>News not found!</p>";
+                        return;
+                    }
+
+                    const html = `
+                        <h1 class="text-2xl font-bold text-blue-600">${newsItem.title}</h1>
+                        <p class="text-gray-700 mt-4">${newsItem.description}</p>
+                        <p class="text-sm text-gray-500 mt-2">Date: ${new Date(newsItem.date).toLocaleDateString()}</p>
+                    `;
+                    document.getElementById('news-details').innerHTML = html;
+                })
+                .catch(err => {
+                    console.error("Error loading news details:", err);
+                    document.getElementById('news-details').innerHTML = "<p>Error loading news details!</p>";
+                });
+        });
+    </script>
+
+</body>
+</html>

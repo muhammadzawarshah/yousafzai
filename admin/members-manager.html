@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <my-title></my-title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="text-gray-600">
+
+    <!-- Content Wrapper -->
+    <div>
+        <!-- Web Components -->
+        <my-header></my-header>  
+        <my-nav></my-nav>  
+
+        <!-- Main Section -->
+        <main class="admin-main-element">
+            <div class="my-4">
+                <div class="card-for-form">
+                    <h2 class="main-heading-forCard text-center">Members Manager</h2>
+
+                    <table class="table-default">
+                        <thead>
+                            <tr>
+                                <th class="th-td-default">S/No.</th>
+                                <th class="th-td-default">Name</th>
+                                <th class="th-td-default">Father Name</th>
+                                <th class="th-td-default">Main Cast</th>
+                                <th class="th-td-default">Sub Cast 1</th>
+                                <th class="th-td-default">Sub Cast 2</th>
+                                <th class="th-td-default">Sub Cast 3</th>
+                                <th class="th-td-default">Sub Cast 4</th>
+                                <th class="th-td-default">Email</th>
+                                <th class="th-td-default">District</th>
+                                <th class="th-td-default">Address</th>
+                                <th class="th-td-default">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Data will be inserted dynamically here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <my-footer></my-footer> 
+    </div>
+
+    <!-- Scripts -->
+    <script src="/admin/adminComponents.js" defer></script>
+    <script src="/admin/js/hierarchy-selector.js" defer></script> <!-- Important for dropdowns -->
+    <script src="/admin/js/admin-members.js" defer></script> <!-- Members Manager -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
